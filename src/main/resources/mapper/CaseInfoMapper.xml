@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.dao.CaseInfoMapper">
+  <resultMap id="BaseResultMap" type="com.example.demo.model.CaseInfo">
+    <!--
+      WARNING - @mbg.generated
+    -->
+    <id column="cid" jdbcType="VARCHAR" property="cid" />
+    <result column="dateTime" jdbcType="VARCHAR" property="dateTime" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="lat" jdbcType="DECIMAL" property="lat" />
+    <result column="lng" jdbcType="DECIMAL" property="lng" />
+    <result column="details" jdbcType="VARCHAR" property="details" />
+    <result column="type" jdbcType="VARCHAR" property="type" />
+    <result column="did" jdbcType="INTEGER" property="did" />
+  </resultMap>
+
+  <sql id="Base_Column_List">
+      cid,lat,lng,address,details,type,did,datetime
+  </sql>
+
+  <select id="selectByCid" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from case_info
+    where cid = #{cid}
+  </select>
+
+  <select id="queryCase" resultMap="BaseResultMap">
+    select
+      <include refid="Base_Column_List"/>
+    from case_info
+    where did = #{did} and type = #{type}
+  </select>
+</mapper>
